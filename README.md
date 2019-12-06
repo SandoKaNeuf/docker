@@ -146,6 +146,25 @@ https://devblogs.microsoft.com/premier-developer/running-a-net-core-web-applicat
 _03/12 ## Complément sur les webapi .NET Core
 
 https://dotnetplaybook.com/develop-a-rest-api-with-net-core/
+Création d'une api rest et explication du fonctionnement de l'api, workflow très détaillé.***
+
+## Details on ActionResult Type
+https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-2.2
+
+
+## Error on install Entity frameworkCore => version of F has to be the same as NetCore version 3.0.0
+$ dotnet add package Microsoft.EntityFrameworkCore.Tools --version 3.0.0
+$ dotnet tool install --global dotnet-ef --version 3.0.0
+$ dotnet ef
+
+## Instead of create a SQL Servr instance, I want to use a MariaDb in a container
+$ docker run --name some-mariadb -e MYSQL_ROOT_PASSWORD=passe -d mariadb:10.3
+$ docker run --rm -p 3306:3306 --name some-mariadb -e MYSQL_ROOT_PASSWORD=passe -d mariadb:10
+$ docker exec -i some-mariadb bash
+$ mysql --user="root" --password="passe" --execute='CREATE DATABASE 'abcxtest';'
+=> Error ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+
+Stop at Revisit the Startup Class
 
 ## Using .NET and Docker Together
 
