@@ -1,0 +1,16 @@
+Create table CommandItems(
+Id INT AUTO_INCREMENT PRIMARY KEY,
+HowTo VARCHAR(255) not null,
+Platform Text not null,
+CommandLine Text not null);
+
+INSERT INTO CommandItems (HowTo, Platform, Commandline)
+VALUES ('Create a new migration', 'Entity Framework Core Command Line', 'dotnet ef migrations add' );
+
+
+INSERT INTO CommandItems (HowTo, Platform, Commandline)
+VALUES ('Apply Migrations to DB (Update Database)', 'Entity Framework Package Manager Console', 'update-database' );
+
+commit;
+
+Select * from CommandItems;

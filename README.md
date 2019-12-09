@@ -161,10 +161,30 @@ $ dotnet ef
 $ docker run --name some-mariadb -e MYSQL_ROOT_PASSWORD=passe -d mariadb:10.3
 $ docker run --rm -p 3306:3306 --name some-mariadb -e MYSQL_ROOT_PASSWORD=passe -d mariadb:10
 $ docker exec -i some-mariadb bash
-$ mysql --user="root" --password="passe" --execute='CREATE DATABASE 'abcxtest';'
+$ mysql --user="root" --password="passe" --execute='CREATE DATABASE 'CmdAPI';'
 => Error ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
 
 Stop at Revisit the Startup Class
+
+## BUILD :
+$ dotnet build
+=> Startup.cs(31,37): error CS1061: 'DbContextOptionsBuilder' ne contient pas de d▒finition pour 'UseMySQL' et aucune m▒thode d'extension accessible 'UseMySQL' acceptant un premier argument de type 'DbContextOptionsBuilder' n'a ▒t▒ trouv▒e (une directive using ou une r▒f▒rence d'assembly est-elle manquante▒?)
+
+# Add 
+$ dotnet add package MySql.Data.EntityFrameworkCore --version 8.0.18
+# et dans Startup.cs
+using MySql.Data.EntityFrameworkCore;
+
+## OK 
+=> Postman : 
+System.TypeLoadException: Method 'get_Info' in type 'MySql.Data.EntityFrameworkCore.Infraestructure.MySQLOptionsExtension' from assembly 'MySql.Data.EntityFrameworkCore, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d' does not have an implementation.
+Rep :
+You will need to wait for MySQL provider which works with EF Core 3.0. Till that is released, you would need to stick to version 2.2
+
+# Réessayer avec Pomelo version 3.0.0
+# Note that version 3.0 of the Pomelo MySQL provider has already been released, so this problem should no longer occur. If anyone is still running into issues, please open a new issue on the Pomelo repository.
+$ dotnet add package Pomelo.EntityFrameworkCore.MySql --version 3.0.0
+=> NOK
 
 ## Using .NET and Docker Together
 
