@@ -1,3 +1,5 @@
+using System.ComponentModel.Design;
+using System.Net.Security;
 using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
 using System.Transactions;
@@ -15,7 +17,8 @@ using Microsoft.AspNetCore.Mvc;
 using CommandAPI.Models;
 using Pomelo.EntityFrameworkCore.MySql;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.EntityFrameworkCore;
+// using Microsoft.EntityFrameworkCore.SqlServer;
+// using MySql.Data.EntityFrameworkCore;
 
 namespace CommandAPI
 {
@@ -30,7 +33,14 @@ namespace CommandAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CommandContext>
-                (options => options.UseMySQL(Configuration["Data:CommandAPIConnection:ConnectionString"]));
+                (options => options.UseMySql(Configuration["CommandAPIConnection:DefaultConnection"]));
+
+            // services.AddDbContext<CommandContext>
+            //     (options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
+            // services.AddDbContext<ApplicationDbContext>
+            // (options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddMvc(option => option.EnableEndpointRouting = false);
         }

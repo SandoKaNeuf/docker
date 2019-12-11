@@ -10,7 +10,7 @@ namespace CommandAPI.Controllers
     {
         private readonly CommandContext _context;
 
-        public CommandsController(CommandContext context){
+        public CommandsController(CommandContext context) {
             _context = context;
         }
 
@@ -21,7 +21,32 @@ namespace CommandAPI.Controllers
         }
         // public ActionResult<IEnumerable<string>> Get()
         // {
-            // return new string[] {"this", "is", "hard", "coded"};
+        // return new string[] {"this", "is", "hard", "coded"};
         // }
+
+        [HttpGet("{id}")]
+        public ActionResult<Command> GetCommandItem(int id)
+        {
+            var commandItem = _context.CommandItems.Find(id);
+
+            if (commandItem == null)
+            {
+                return NotFound();
+            }
+
+            return commandItem;
+        }
+
+        [HttpGet("{id}")]
+        public CommandAPI Get(int id) => _context.CommandItems.Find(id);
+
+        [HttpPost]
+        public ActionResult<CommandAPI> PostCommandItem(CommandAPI command)
+        {
+            _context.CommandItems.Add(command);
+            _context.SaveChanges();
+
+            return CreatedAtAction("GetCommandItem", new Command{Id = command.Id}, command);
+        }
     }
 }
