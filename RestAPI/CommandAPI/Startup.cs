@@ -38,9 +38,6 @@ namespace CommandAPI
             // services.AddDbContext<CommandContext>
             //     (options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
-            // services.AddDbContext<ApplicationDbContext>
-            // (options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddMvc(option => option.EnableEndpointRouting = false);
         }

@@ -1,0 +1,5 @@
+{
+  "howto": "List status of Linux services",
+  "platform": "Ubuntu Linux",
+  "commandline":  "sudo service --status-all"
+}
